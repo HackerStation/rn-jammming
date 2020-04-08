@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { Header } from './src/sections';
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
@@ -9,7 +10,7 @@ const instructions = Platform.select({
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Header</Text>
+      <Header />
       <Text>SearchBar</Text>
       <Text>SearchResults</Text>
       <Text>TrackList</Text>
@@ -22,6 +23,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#6B2A8A',
   },
 });
