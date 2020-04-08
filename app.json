@@ -1,0 +1,17 @@
+{
+  "name": "rn",
+  "displayName": "rn",
+  "expo": {
+    "name": "rn",
+    "slug": "rn",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
