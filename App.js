@@ -11,6 +11,11 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header />
+      <Image
+        source={require('./src/assets/images/background_photo.jpg')}
+        style={styles.backgroundImage}
+        resizeMode='cover'
+      />
       <Text>SearchBar</Text>
       <Text>SearchResults</Text>
       <Text>TrackList</Text>
@@ -24,5 +29,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#6B2A8A',
+  },
+  backgroundImage: {
+    width: '100%',
+    height: '100%',
   },
 });
