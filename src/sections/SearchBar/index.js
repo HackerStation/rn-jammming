@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { Button, Keyboard, StyleSheet, TextInput, View } from 'react-native';
 import { Colors } from '../../styles';
 
 export const SearchBar = ({ onUserSearch }) => {
@@ -9,6 +9,11 @@ export const SearchBar = ({ onUserSearch }) => {
     setUserInput(query);
   };
 
+  const handleUserSearch = () => {
+    onUserSearch(userInput);
+    setUserInput('');
+    Keyboard.dismiss();
+  };
   return (
     <View style={styles.container}>
       <TextInput
@@ -21,7 +26,7 @@ export const SearchBar = ({ onUserSearch }) => {
         <Button
           title='SEARCH'
           color={Colors.primary}
-          onPress={() => onUserSearch(userInput)}
+          onPress={handleUserSearch}
         />
       </View>
     </View>
@@ -39,8 +44,10 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     backgroundColor: '#fff',
+    fontSize: 16,
     justifyContent: 'center',
     marginBottom: 20,
     width: '60%',
+    paddingHorizontal: 10,
   },
 });

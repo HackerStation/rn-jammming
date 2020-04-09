@@ -19,15 +19,15 @@ export const getAccessToken = async () => {
 };
 export const fetchTracks = async (trackName) => {
   try {
-    const accessToken = await getAccessToken();
-    if (accessToken) {
+    const results = await getAccessToken();
+    if (results) {
       const res = await fetch(
         `https://api.spotify.com/v1/search?q=${trackName}&type=track`,
         {
           method: 'GET',
           headers: {
             'Content-Type': 'applocation/json',
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: `Bearer ${results['access_token']}`,
           },
         }
       );

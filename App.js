@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
-import { Header, SearchBar } from './src/sections';
+import {
+  ImageBackground,
+  StyleSheet,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
+import { Header, SearchBar, TrackList } from './src/sections';
+import { Card } from './src/lib/components';
 import { fetchTracks } from './src/lib/api';
-
-const instructions = Platform.select({
-  ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
-  android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
-});
 
 export default function App() {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleUserSearch = async (userInput) => {
     const results = await fetchTracks(userInput.split(' ').join('%20'));
-    setSearchResults(results);
+    setSearchResults(results.tracks.items.slice(0, 10));
   };
 
   return (
@@ -25,18 +27,13 @@ export default function App() {
         resizeMode='cover'
       >
         <SearchBar onUserSearch={handleUserSearch} />
-        <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: '#fff',
-            paddingVertical: 30,
-            width: 300,
-          }}
-        >
-          <Text>SearchResults</Text>
-          <Text>TrackList</Text>
-          <Text>Playlist</Text>
+        <View style={styles.cardContainer}>
+          <Card>
+            <Text style={styles.cardHeader}>Results</Text>
+            <ScrollView style={styles.scrollView}>
+              <TrackList tracks={searchResults} />
+            </ScrollView>
+          </Card>
         </View>
       </ImageBackground>
     </View>
@@ -44,13 +41,24 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    width: '100%',
+    height: '100%',
+  },
+  cardContainer: {
+    alignItems: 'center',
+    height: 400,
+  },
+  cardHeader: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold',
+    letterSpacing: 1.5,
+    paddingBottom: 10,
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#6B2A8A',
-  },
-  backgroundImage: {
-    width: '100%',
-    height: '100%',
   },
 });
