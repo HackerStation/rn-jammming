@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
-import { Header } from './src/sections';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Header, SearchBar } from './src/sections';
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
@@ -11,15 +11,26 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Header />
-      <Image
+      <ImageBackground
         source={require('./src/assets/images/background_photo.jpg')}
         style={styles.backgroundImage}
         resizeMode='cover'
-      />
-      <Text>SearchBar</Text>
-      <Text>SearchResults</Text>
-      <Text>TrackList</Text>
-      <Text>Playlist</Text>
+      >
+        <SearchBar />
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#fff',
+            paddingVertical: 30,
+            width: 300,
+          }}
+        >
+          <Text>SearchResults</Text>
+          <Text>TrackList</Text>
+          <Text>Playlist</Text>
+        </View>
+      </ImageBackground>
     </View>
   );
 }
