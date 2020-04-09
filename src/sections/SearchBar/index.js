@@ -1,22 +1,29 @@
-import React from 'react';
-import {
-  Button,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, { useState } from 'react';
+import { Button, StyleSheet, TextInput, View } from 'react-native';
 import { Colors } from '../../styles';
 
-export const SearchBar = (props) => {
+export const SearchBar = ({ onUserSearch }) => {
+  const [userInput, setUserInput] = useState('');
+
+  const onUserInput = (query) => {
+    setUserInput(query);
+  };
+
   return (
     <View style={styles.container}>
-      <TextInput style={styles.searchInput} />
-      <TouchableOpacity>
-        <View style={styles.searchButton}>
-          <Button title='SEARCH' color={Colors.primary} />
-        </View>
-      </TouchableOpacity>
+      <TextInput
+        style={styles.searchInput}
+        placeholder='Enter a song title'
+        value={userInput}
+        onChangeText={(query) => onUserInput(query)}
+      />
+      <View style={styles.searchButton}>
+        <Button
+          title='SEARCH'
+          color={Colors.primary}
+          onPress={() => onUserSearch(userInput)}
+        />
+      </View>
     </View>
   );
 };

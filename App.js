@@ -1,6 +1,7 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { Header, SearchBar } from './src/sections';
+import { fetchTracks } from './src/lib/api';
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
@@ -8,6 +9,13 @@ const instructions = Platform.select({
 });
 
 export default function App() {
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleUserSearch = async (userInput) => {
+    const results = await fetchTracks(userInput.split(' ').join('%20'));
+    setSearchResults(results);
+  };
+
   return (
     <View style={styles.container}>
       <Header />
@@ -16,7 +24,7 @@ export default function App() {
         style={styles.backgroundImage}
         resizeMode='cover'
       >
-        <SearchBar />
+        <SearchBar onUserSearch={handleUserSearch} />
         <View
           style={{
             alignItems: 'center',
